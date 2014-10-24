@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using System.Drawing;
 
+
 namespace SchetsEditor
 {
     class Schets
     {
         private Bitmap bitmap;
-        
+        //
+        public List<ISchetsTool> lijst;
+        //
         public Schets()
         {
             bitmap = new Bitmap(1, 1);
@@ -16,11 +19,17 @@ namespace SchetsEditor
         {
             get { return Graphics.FromImage(bitmap); }
         }
+        //
+        public Bitmap Bitmap
+        {
+            get { return bitmap;}
+        }
+        //
         public void VeranderAfmeting(Size sz)
         {
             if (sz.Width > bitmap.Size.Width || sz.Height > bitmap.Size.Height)
             {
-                Bitmap nieuw = new Bitmap( Math.Max(sz.Width,  bitmap.Size.Width)
+                Bitmap nieuw = new Bitmap( Math.Max(sz.Width, bitmap.Size.Width)
                                          , Math.Max(sz.Height, bitmap.Size.Height)
                                          );
                 Graphics gr = Graphics.FromImage(nieuw);

@@ -7,7 +7,7 @@ namespace SchetsEditor
 {
     public class SchetsControl : UserControl
     {
-        private Schets schets;
+        public Schets schets;
         private Color penkleur;
 
         public Color PenKleur 
@@ -26,10 +26,18 @@ namespace SchetsEditor
         private void teken(object o, PaintEventArgs pea)
         {   schets.Teken(pea.Graphics);
         }
+        //
+       
+        public Bitmap Bitmap
+        {
+            get { return schets.Bitmap; }
+        }
+        //
         private void veranderAfmeting(object o, EventArgs ea)
         {   schets.VeranderAfmeting(this.ClientSize);
             this.Invalidate();
         }
+        //belangrijk
         public Graphics MaakBitmapGraphics()
         {   Graphics g = schets.BitmapGraphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Windows.Forms;
 using System.Reflection;
 using System.Resources;
@@ -40,17 +41,22 @@ namespace SchetsEditor
         {
             this.Close();
         }
-
+        //
+        private void opslaan(object sender, EventArgs e)
+        {
+            schetscontrol.Bitmap.Save("file.jpg", ImageFormat.Jpeg);
+        }
+        //
         public SchetsWin()
         {
             ISchetsTool[] deTools = { new PenTool()         
                                     , new LijnTool()
                                     , new RechthoekTool()
+                                    , new VolRechthoekTool()
                                     //
                                     , new EllipsTool()
                                     , new VolEllipsTool()
                                     //
-                                    , new VolRechthoekTool()
                                     , new TekstTool()
                                     , new GumTool()
                                     };
@@ -97,6 +103,9 @@ namespace SchetsEditor
             ToolStripMenuItem menu = new ToolStripMenuItem("File");
             menu.MergeAction = MergeAction.MatchOnly;
             menu.DropDownItems.Add("Sluiten", null, this.afsluiten);
+            //
+            menu.DropDownItems.Add("Opslaan", null, this.opslaan);
+            //
             menuStrip.Items.Add(menu);
         }
 

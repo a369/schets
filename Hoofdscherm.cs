@@ -7,7 +7,6 @@ namespace SchetsEditor
     public class Hoofdscherm : Form
     {
         MenuStrip menuStrip;
-
         public Hoofdscherm()
         {   this.ClientSize = new Size(800, 600);
             menuStrip = new MenuStrip();
@@ -32,7 +31,7 @@ namespace SchetsEditor
             menuStrip.Items.Add(menu);
         }
         private void about(object o, EventArgs ea)
-        {   MessageBox.Show("Schets versie 1.0\n(c) UU Informatica 2010"
+        {   MessageBox.Show("Schets versie 1.1\n(c) UU Informatica 2010 & Tomas & Adriaan \n *Nu met cirkels"
                            , "Over \"Schets\""
                            , MessageBoxButtons.OK
                            , MessageBoxIcon.Information
