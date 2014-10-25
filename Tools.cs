@@ -11,7 +11,6 @@ namespace SchetsEditor
         void MuisLos(SchetsControl s, Point p);
         void Letter(SchetsControl s, char c);
     }
-
     public abstract class StartpuntTool : ISchetsTool
     {
         protected Point startpunt;
@@ -75,8 +74,8 @@ namespace SchetsEditor
         //belangrijk
         public override void MuisLos(SchetsControl s, Point p)
         {   base.MuisLos(s, p);
-            s.schets.lijst.Add();
-            //this.Compleet(s.MaakBitmapGraphics(), this.startpunt, p);
+            //hier
+            this.Compleet(s.MaakBitmapGraphics(), this.startpunt, p);
             s.Invalidate();
         }
         public override void Letter(SchetsControl s, char c)
@@ -123,7 +122,7 @@ namespace SchetsEditor
     {
         public override string ToString() { return "vlak"; }
 
-        public override void Compleet(Graphics g, Point p1, Point p2)
+        public override void Compleet(Graphics g, Point p1, Point p2) 
         {   g.FillRectangle(kwast, TweepuntTool.Punten2Rechthoek(p1, p2));
         }
     }

@@ -9,7 +9,7 @@ namespace SchetsEditor
     {
         private Bitmap bitmap;
         //
-        public List<ISchetsTool> lijst;
+        public List<Objecten> lijst;
         //
         public Schets()
         {

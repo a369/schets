@@ -7,7 +7,7 @@ namespace SchetsEditor
 {
     public class SchetsControl : UserControl
     {
-        public Schets schets;
+        private Schets schets;
         private Color penkleur;
 
         public Color PenKleur 
