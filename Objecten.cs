@@ -4,53 +4,43 @@ using System.Drawing.Drawing2D;
 
 namespace SchetsEditor
 {
-    class Objecten
+    class Object
     {
-        protected Graphics gr;
-        protected Point p1;
-        protected Point p2;
-        protected Brush kwast;
-        protected char c;
+        public Graphics gr;
+        public Point Plek;
+        public Point Eind;
+        public Brush Kwast;
+        public char C;
+       
     }
-    class TweepuntObject : Objecten
+    class TweepuntObject : Object
     {
         public Rectangle RechthoekO()
         {
-            return new Rectangle(new Point(Math.Min(p1.X,p2.X), Math.Min(p1.Y,p2.Y))
-                                , new Size (Math.Abs(p1.X-p2.X), Math.Abs(p1.Y-p2.Y)));
+            return new Rectangle(new Point(Math.Min(Plek.X,Eind.X), Math.Min(Plek.Y,Eind.Y))
+                                , new Size (Math.Abs(Plek.X-Eind.X), Math.Abs(Plek.Y-Eind.Y)));
         }
         public Pen MaakPen()
         {
-            Pen pen = new Pen(kwast, 3);
+            Pen pen = new Pen(Kwast, 3);
             pen.StartCap = LineCap.Round;
             pen.EndCap = LineCap.Round;
             return pen;
         }
-        protected void Set(Point P1, Point P2, Brush B, char C)
-        {
-            p1 = P1;
-            p2 = P2;
-            kwast = B;
-            c = C;
-        }
+        
+        public virtual void maak(Graphics gr) { }
     }
     class VolRechthoekObject : TweepuntObject
     {
-        public void VolRecthoek(Point P1, Point P2, Brush B, char C)
-        {
-            Set(P1, P2, B, C);
-        }
+        
         public override void maak(Graphics gr)
         {
-            gr.FillRectangle(kwast, RechthoekO());
+            gr.FillRectangle(Kwast, RechthoekO());
         }
     }
     class RechthoekObject : VolRechthoekObject
     {
-        public void Recthoek(Point P1, Point P2, Brush B, char C)
-        {
-            Set(P1, P2, B, C);
-        }
+        
         public override void maak(Graphics gr)
         {
             gr.DrawRectangle(MaakPen(), RechthoekO());
@@ -58,21 +48,15 @@ namespace SchetsEditor
     }
     class VolEllipsObject : TweepuntObject
     {
-        public void VolEllips(Point P1, Point P2, Brush B, char C)
-        {
-            Set(P1, P2, B, C);
-        }
+        
         public override void maak(Graphics gr)
         {
-            gr.FillEllipse(kwast, RechthoekO());
+            gr.FillEllipse(Kwast, RechthoekO());
         }
     }
     class EllipsObject : VolEllipsObject
     {
-        public void Ellips(Point P1, Point P2, Brush B, char C)
-        {
-            Set(P1, P2, B, C);
-        }
+        
         public override void maak(Graphics gr)
         {
             gr.DrawEllipse(MaakPen(), RechthoekO());
@@ -80,14 +64,10 @@ namespace SchetsEditor
     }
     class LijnObject : TweepuntObject
     {
-        public void Lijn(Point P1, Point P2, Brush B, char C)
-        {
-            Set(P1, P2, B, C);
-            Maak();
-        }
+       
         public override void maak(Graphics gr)
         {
-            gr.DrawLine(MaakPen(), p1, p2);
+            gr.DrawLine(MaakPen(), Plek, Eind);
         }
     }
 }

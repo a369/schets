@@ -52,6 +52,7 @@ namespace SchetsEditor
 
     public abstract class TweepuntTool : StartpuntTool
     {
+        protected Point eindpunt;
         public static Rectangle Punten2Rechthoek(Point p1, Point p2)
         {   return new Rectangle( new Point(Math.Min(p1.X,p2.X), Math.Min(p1.Y,p2.Y))
                                 , new Size (Math.Abs(p1.X-p2.X), Math.Abs(p1.Y-p2.Y))

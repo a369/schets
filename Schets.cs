@@ -9,7 +9,24 @@ namespace SchetsEditor
     {
         private Bitmap bitmap;
         //
-        public List<Objecten> lijst;
+        public List<Object> lijst;
+        Object[] ding = {
+                            new LijnObject(),
+                            new VolRechthoekObject(),
+                            new RechthoekObject(),
+                            new VolEllipsObject(),
+                            new EllipsObject()
+                        };
+        public void Voegtoe(int i, Point p1, Point p2, Brush b, char c)
+        {
+            Object huidigding;
+            huidigding = this.ding[i];
+            huidigding.Plek = p1;
+            huidigding.Eind = p2;
+            huidigding.Kwast = b;
+            huidigding.C = c;
+            lijst.Add(huidigding);
+        }
         //
         public Schets()
         {
