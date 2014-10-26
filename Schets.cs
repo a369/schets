@@ -10,17 +10,26 @@ namespace SchetsEditor
         private Bitmap bitmap;
         //
         public List<Object> lijst = new List<Object>();
-        Object[] ding = {
+        /*Object[] ding = {
                             new LijnObject(),
                             new VolRechthoekObject(),
                             new RechthoekObject(),
                             new VolEllipsObject(),
                             new EllipsObject()
-                        };
+                        };*/
+        private Object ding(int i)
+        {
+            if (i == 0) return new LijnObject();
+            if (i == 1) return new VolRechthoekObject();
+            if (i == 2) return new RechthoekObject();
+            if (i == 3) return new VolEllipsObject();
+            else return new EllipsObject();
+
+        }
         public void Voegtoe(int i, Point p1, Point p2, Brush b, char c)
         {
             Object huidigding;
-            huidigding = this.ding[i];
+            huidigding = this.ding(i);
             huidigding.Plek = p1;
             huidigding.Eind = p2;
             huidigding.Kwast = b;
