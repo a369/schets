@@ -4,13 +4,13 @@ using System.Drawing.Drawing2D;
 
 namespace SchetsEditor
 {
-    class Object
+    abstract class Object
     {
-        public Graphics gr;
         public Point Plek;
         public Point Eind;
         public Brush Kwast;
         public char C;
+        public abstract void maak(Graphics gr);
        
     }
     class TweepuntObject : Object
@@ -28,7 +28,7 @@ namespace SchetsEditor
             return pen;
         }
         
-        public virtual void maak(Graphics gr) { }
+        public override void maak(Graphics gr) { }
     }
     class VolRechthoekObject : TweepuntObject
     {

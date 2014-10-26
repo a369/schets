@@ -9,7 +9,38 @@ namespace SchetsEditor
     {
         private Schets schets;
         private Color penkleur;
+        //
+        private int i;
+        private Point p1;
+        private Point p2 = new Point (0,0);
+        private Brush b;
+        private char c = ' ';
 
+        public int soort
+        {
+            set { i = value; }
+        }
+        public Point start
+        {
+            set { p1 = value; }
+        }
+        public Point eind
+        {
+            set { p2 = value; }
+        }
+        public Brush kwast
+        {
+            set { b = value; }
+        }
+        public char letter
+        {
+            set { c = value; }
+        }
+        public void maak()
+        {
+            schets.Voegtoe(i, p1, p2, b, c);
+        }
+        //
         public Color PenKleur 
         {   get { return penkleur; } 
         }

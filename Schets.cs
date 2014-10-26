@@ -9,7 +9,7 @@ namespace SchetsEditor
     {
         private Bitmap bitmap;
         //
-        public List<Object> lijst;
+        public List<Object> lijst = new List<Object>();
         Object[] ding = {
                             new LijnObject(),
                             new VolRechthoekObject(),
@@ -58,6 +58,12 @@ namespace SchetsEditor
         public void Teken(Graphics gr)
         {
             gr.DrawImage(bitmap, 0, 0);
+            //
+            foreach(Object ding in lijst)
+            {
+                ding.maak(gr);
+            }
+            //
         }
         public void Schoon()
         {

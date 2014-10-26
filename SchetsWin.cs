@@ -15,6 +15,9 @@ namespace SchetsEditor
         ISchetsTool huidigeTool;
         Panel paneel;
         bool vast;
+        //
+        int gereedschap;
+        //
         ResourceManager resourcemanager
             = new ResourceManager("SchetsEditor.Properties.Resources"
                                  , Assembly.GetExecutingAssembly()
@@ -70,8 +73,9 @@ namespace SchetsEditor
             schetscontrol = new SchetsControl();
             schetscontrol.Location = new Point(64, 10);
             schetscontrol.MouseDown += (object o, MouseEventArgs mea) =>
-                                       {   vast=true;  
-                                           huidigeTool.MuisVast(schetscontrol, mea.Location); 
+                                       {   vast=true;
+                                           huidigeTool.Soort(schetscontrol);
+                                           huidigeTool.MuisVast(schetscontrol, mea.Location);   
                                        };
             schetscontrol.MouseMove += (object o, MouseEventArgs mea) =>
                                        {   if (vast)
@@ -81,7 +85,7 @@ namespace SchetsEditor
                                        {   vast=false; 
                                            huidigeTool.MuisLos (schetscontrol, mea.Location); 
                                        };
-            schetscontrol.KeyPress +=  (object o, KeyPressEventArgs kpea) => 
+            schetscontrol.KeyPress  += (object o, KeyPressEventArgs kpea) => 
                                        {   huidigeTool.Letter  (schetscontrol, kpea.KeyChar); 
                                        };
             this.Controls.Add(schetscontrol);

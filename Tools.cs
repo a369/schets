@@ -10,20 +10,25 @@ namespace SchetsEditor
         void MuisDrag(SchetsControl s, Point p);
         void MuisLos(SchetsControl s, Point p);
         void Letter(SchetsControl s, char c);
+        void Soort(SchetsControl s);
     }
     public abstract class StartpuntTool : ISchetsTool
     {
         protected Point startpunt;
         protected Brush kwast;
+        protected int i;
 
         public virtual void MuisVast(SchetsControl s, Point p)
         {   startpunt = p;
+            s.start = p;
         }
         public virtual void MuisLos(SchetsControl s, Point p)
         {   kwast = new SolidBrush(s.PenKleur);
+            s.kwast = kwast;
         }
         public abstract void MuisDrag(SchetsControl s, Point p);
         public abstract void Letter(SchetsControl s, char c);
+        public abstract void Soort(SchetsControl s);
     }
 
     public class TekstTool : StartpuntTool
@@ -47,6 +52,10 @@ namespace SchetsEditor
                 startpunt.X += (int)sz.Width;
                 s.Invalidate();
             }
+        }
+        public override void Soort(SchetsControl s)
+        {
+            i = 5;
         }
     }
 
@@ -75,8 +84,10 @@ namespace SchetsEditor
         //belangrijk
         public override void MuisLos(SchetsControl s, Point p)
         {   base.MuisLos(s, p);
-            //hier
-            this.Compleet(s.MaakBitmapGraphics(), this.startpunt, p);
+            s.eind = p;
+            s.soort = i;
+            s.maak();
+            //this.Compleet(s.MaakBitmapGraphics(), this.startpunt, p);
             s.Invalidate();
         }
         public override void Letter(SchetsControl s, char c)
@@ -87,6 +98,7 @@ namespace SchetsEditor
         public virtual void Compleet(Graphics g, Point p1, Point p2)
         {   this.Bezig(g, p1, p2);
         }
+        public abstract override void Soort(SchetsControl s);
     }
 
     
@@ -98,6 +110,10 @@ namespace SchetsEditor
         public override void Bezig(Graphics g, Point p1, Point p2)
         {   g.DrawRectangle(MaakPen(kwast,3), TweepuntTool.Punten2Rechthoek(p1, p2));
         }
+        public override void Soort(SchetsControl s)
+        {
+            i = 2;
+        }
     }
     //
     public class EllipsTool : TweepuntTool
@@ -108,6 +124,10 @@ namespace SchetsEditor
         {
             g.DrawEllipse(MaakPen(kwast, 3), TweepuntTool.Punten2Rechthoek(p1, p2));
         }
+        public override void Soort(SchetsControl s)
+        {
+            i = 4;
+        }
     }
     public class VolEllipsTool : EllipsTool
     {
@@ -116,6 +136,10 @@ namespace SchetsEditor
         public override void Compleet(Graphics g, Point p1, Point p2)
         {
             g.FillEllipse(kwast, TweepuntTool.Punten2Rechthoek(p1, p2));
+        }
+        public override void Soort(SchetsControl s)
+        {
+            i = 3;
         }
     }
     //
@@ -126,6 +150,10 @@ namespace SchetsEditor
         public override void Compleet(Graphics g, Point p1, Point p2) 
         {   g.FillRectangle(kwast, TweepuntTool.Punten2Rechthoek(p1, p2));
         }
+        public override void Soort(SchetsControl s)
+        {
+            i = 1;
+        }
     }
 
     public class LijnTool : TweepuntTool
@@ -134,6 +162,10 @@ namespace SchetsEditor
 
         public override void Bezig(Graphics g, Point p1, Point p2)
         {   g.DrawLine(MaakPen(this.kwast,3), p1.X, p1.Y, p2.X, p2.Y);
+        }
+        public override void Soort(SchetsControl s)
+        {
+            i = 0;
         }
     }
 
@@ -145,6 +177,10 @@ namespace SchetsEditor
         {   this.MuisLos(s, p);
             this.MuisVast(s, p);
         }
+        public override void Soort(SchetsControl s)
+        {
+            i = 0;
+        }
     }
     
     public class GumTool : PenTool
@@ -154,5 +190,11 @@ namespace SchetsEditor
         public override void Bezig(Graphics g, Point p1, Point p2)
         {   g.DrawLine(MaakPen(Brushes.White, 7), p1.X, p1.Y, p2.X, p2.Y);
         }
+        //\\
+        public override void Soort(SchetsControl s)
+        {
+            i = 5;
+        }
+        //\\
     }
 }
