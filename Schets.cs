@@ -23,7 +23,8 @@ namespace SchetsEditor
             if (i == 1) return new VolRechthoekObject();
             if (i == 2) return new RechthoekObject();
             if (i == 3) return new VolEllipsObject();
-            else return new EllipsObject();
+            if (i == 4) return new EllipsObject();
+            else return new LetterObject();
 
         }
         public void Voegtoe(int i, Point p1, Point p2, Brush b, char c)

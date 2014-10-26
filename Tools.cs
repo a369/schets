@@ -41,7 +41,8 @@ namespace SchetsEditor
         {
             if (c >= 32)
             {
-                Graphics gr = s.MaakBitmapGraphics();
+                s.letter = c;
+                /*Graphics gr = s.MaakBitmapGraphics();
                 Font font = new Font("Tahoma", 40);
                 string tekst = c.ToString();
                 SizeF sz = 
@@ -50,7 +51,7 @@ namespace SchetsEditor
                                               this.startpunt, StringFormat.GenericTypographic);
                 // gr.DrawRectangle(Pens.Black, startpunt.X, startpunt.Y, sz.Width, sz.Height);
                 startpunt.X += (int)sz.Width;
-                s.Invalidate();
+                s.Invalidate();*/
             }
         }
         public override void Soort(SchetsControl s)
@@ -88,7 +89,7 @@ namespace SchetsEditor
             s.soort = i;
             s.maak();
             //this.Compleet(s.MaakBitmapGraphics(), this.startpunt, p);
-            s.Invalidate();
+            //s.Invalidate();
         }
         public override void Letter(SchetsControl s, char c)
         {

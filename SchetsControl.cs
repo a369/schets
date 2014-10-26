@@ -39,6 +39,7 @@ namespace SchetsEditor
         public void maak()
         {
             schets.Voegtoe(i, p1, p2, b, c);
+            Invalidate();
         }
         //
         public Color PenKleur 
