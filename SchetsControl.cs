@@ -41,6 +41,7 @@ namespace SchetsEditor
             schets.Voegtoe(i, p1, p2, b, c);
             Invalidate();
         }
+       
         //
         public Color PenKleur 
         {   get { return penkleur; } 
@@ -76,8 +77,14 @@ namespace SchetsEditor
             return g;
         }
         public void Schoon(object o, EventArgs ea)
-        {   schets.Schoon();
+        {
+            schets.Schoon();
             this.Invalidate();
+        }
+        public void Undo(object o, EventArgs ea)
+        {
+            schets.Undo();
+            Invalidate();
         }
         public void Roteer(object o, EventArgs ea)
         {   schets.Roteer();

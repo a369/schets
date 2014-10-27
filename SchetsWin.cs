@@ -192,6 +192,12 @@ namespace SchetsEditor
                 cbb.Items.Add(k);
             cbb.SelectedIndex = 0;
             paneel.Controls.Add(cbb);
+
+            b = new Button();
+            b.Text = "Undo";
+            b.Location = new Point(400, 0);
+            b.Click += schetscontrol.Undo;
+            paneel.Controls.Add(b);
         }
     }
 }

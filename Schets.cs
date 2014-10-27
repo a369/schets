@@ -9,6 +9,7 @@ namespace SchetsEditor
     {
         private Bitmap bitmap;
         //
+        int tel = -1;
         public List<Object> lijst = new List<Object>();
         /*Object[] ding = {
                             new LijnObject(),
@@ -36,6 +37,7 @@ namespace SchetsEditor
             huidigding.Kwast = b;
             huidigding.C = c;
             lijst.Add(huidigding);
+            tel++;
         }
         //
         public Schets()
@@ -77,9 +79,26 @@ namespace SchetsEditor
         }
         public void Schoon()
         {
+            
+            while(tel > -1)
+            {
+                lijst.RemoveAt(tel);
+                tel -=1;
+            }
+        }
+        public void Undo()
+        {
+            if (tel > -1)
+            {
+                lijst.RemoveAt(tel);
+                tel -= 1;
+            }
+        }
+       /* public void Schoon()
+        {
             Graphics gr = Graphics.FromImage(bitmap);
             gr.FillRectangle(Brushes.White, 0, 0, bitmap.Width, bitmap.Height);
-        }
+        }*/
         public void Roteer()
         {
             bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
