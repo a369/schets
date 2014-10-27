@@ -19,11 +19,8 @@ namespace SchetsEditor
         {
             Font font = new Font("Tahoma", 40);
             string tekst = C.ToString();
-            SizeF sz =
-            gr.MeasureString(tekst, font, this.Plek, StringFormat.GenericTypographic);
             gr.DrawString(tekst, font, Kwast,
                                           this.Plek, StringFormat.GenericTypographic);
-            Plek.X += (int)sz.Width;
         }
     }
     class TweepuntObject : Object

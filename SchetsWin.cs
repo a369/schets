@@ -16,7 +16,7 @@ namespace SchetsEditor
         Panel paneel;
         bool vast;
         //
-        int gereedschap;
+
         //
         ResourceManager resourcemanager
             = new ResourceManager("SchetsEditor.Properties.Resources"
