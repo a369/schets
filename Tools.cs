@@ -192,13 +192,12 @@ namespace SchetsEditor
     public class GumTool : StartpuntTool
     {
         public override string ToString() { return "gum"; }
-        public override void MuisDrag(SchetsControl s, Point p) { }
+        public override void MuisDrag(SchetsControl s, Point p){ this.MuisVast(s, p); }
         public override void Letter(SchetsControl s, char c) { }
         public override void Soort(SchetsControl s) { }
         public override void MuisVast(SchetsControl s, Point p)
         {
             s.gum(p);
         }
-
     }
 }

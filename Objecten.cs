@@ -10,6 +10,7 @@ namespace SchetsEditor
         public Point Eind;
         public Brush Kwast;
         public char C;
+        public int Soort;
         public abstract void maak(Graphics gr);
         public abstract bool Isgeklikt(Point p);
 
@@ -50,9 +51,10 @@ namespace SchetsEditor
             double d;
             double dy =Eind.Y - Plek.Y;
             double dx =Eind.X - Plek.X;
+            
 
             d = (Math.Abs(dy * p.X - dx * p.Y - Plek.X * Eind.Y + Eind.X * Plek.Y)) / (Math.Sqrt(dx * dx + dy * dy));
-            if (d <= 2)
+            if (d <= 3)
                 return true;
             return false;
 
@@ -159,11 +161,14 @@ namespace SchetsEditor
         }
         public override bool Isgeklikt(Point p)
         {
-            if (Lijn(p))
+            if (base.Isgeklikt(p))
             {
-                return true;
+                if (Lijn(p))
+                {
+                    return true;
+                }
             }
-            else return false;
+            return false;
 
 
         }

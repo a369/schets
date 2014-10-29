@@ -35,9 +35,71 @@ namespace SchetsEditor
             huidigding.Plek = p1;
             huidigding.Eind = p2;
             huidigding.Kwast = b;
+            huidigding.Soort = i;
             huidigding.C = c;
             lijst.Add(huidigding);
             tel++;
+        }
+        public string Opslaan()
+        {
+            string s = "";
+            foreach (Object ding in lijst)
+            {
+                int i = ding.Soort;
+                Point p1 = ding.Plek;
+                Point p2 = ding.Eind;
+                Brush b = ding.Kwast;
+                char c = ding.C;
+                int p1x = p1.X;
+                int p2x = p2.X;
+                int p1y = p1.Y;
+                int p2y = p2.Y;
+
+
+
+                s += " " + i + ' ' + p1x + ' ' + p1y + ' ' + p2x + ' ' + p2y + ' ' + c;
+            }
+
+
+            return s;
+        }
+
+        public void Open(string s)
+        {
+            int i = 0;
+            Point p1 = new Point (0,0);
+            Point p2 = new Point (0,0);
+            Brush b;
+            char c;
+            string[] v = s.Split();
+            for(int t = 0; t < v.Length; t++)
+            {
+                if(t % 6 == 0)
+                {
+                    i = int.Parse(v[t]);
+                }
+                if(t % 6 == 1)
+                {
+                    p1.X = int.Parse(v[t]);
+                }
+                if (t % 6 == 2)
+                {
+                    p1.Y = int.Parse(v[t]);
+                }
+                if (t % 6 == 3)
+                {
+                    p2.X = int.Parse(v[t]);
+                }
+                if (t % 6 == 4)
+                {
+                    p2.Y = int.Parse(v[t]);
+                }
+                if (t % 6 == 5)
+                {
+                    c = v[t][0];
+                    //Voegtoe(i, p1, p2, b, c);
+                }
+            }
         }
         //
         public Schets()

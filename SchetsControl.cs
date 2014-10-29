@@ -14,7 +14,7 @@ namespace SchetsEditor
         private Point p1;
         private Point p2 = new Point (0,0);
         private Brush b;
-        private char c = ' ';
+        private char c = '-';
 
         public int soort
         {
