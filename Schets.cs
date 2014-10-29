@@ -96,13 +96,14 @@ namespace SchetsEditor
         }
         public void gum(Point p)
         {
-            for (int i = tel; i == 0; i-=1)
+            for (int i = tel; i >= 0; i-=1)
             {
-                Object ding = lijst[tel];
+                Object ding = lijst[i];
                 if (ding.Isgeklikt(p))
                 {
                     lijst.RemoveAt(i);
                     tel -= 1;
+                    break;
                 }
                 
             }

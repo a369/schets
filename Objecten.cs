@@ -48,11 +48,11 @@ namespace SchetsEditor
         {
             Rectangle r = RechthoekO();
             double d;
-            double dy = r.Height;
-            double dx = r.Width;
+            double dy =Eind.Y - Plek.Y;
+            double dx =Eind.X - Plek.X;
 
-            d = Math.Abs(dy * p.X - dx * p.Y - Plek.X * Eind.Y + Eind.X * Plek.Y) / Math.Sqrt(dx * dx + dy * dy);
-            if (d >= 2 && d <= 2)
+            d = (Math.Abs(dy * p.X - dx * p.Y - Plek.X * Eind.Y + Eind.X * Plek.Y)) / (Math.Sqrt(dx * dx + dy * dy));
+            if (d <= 2)
                 return true;
             return false;
 
@@ -70,7 +70,7 @@ namespace SchetsEditor
         {
             Rectangle r = RechthoekO();
             
-            if (p.X >= r.X - 1 && p.X <= r.Right + 1 && p.Y >= r.Y - 1 && p.Y <= r.Bottom + 1)
+            if (p.X >= r.X - 2 && p.X <= r.Right + 2 && p.Y >= r.Y - 2 && p.Y <= r.Bottom + 2)
                 return true;
             else return false;
         }
@@ -96,7 +96,7 @@ namespace SchetsEditor
             Rectangle r = RechthoekO();
             if (base.Isgeklikt(p))
             {
-                if (p.X >= r.X + 1 && p.X <= r.Right - 1 && p.Y >= r.Y + 1 && p.Y <= r.Bottom - 1)
+                if (p.X >= r.X + 2 && p.X <= r.Right - 2 && p.Y >= r.Y + 2 && p.Y <= r.Bottom - 2)
                     return false;
                 return true;
             }
@@ -105,7 +105,6 @@ namespace SchetsEditor
     }
     class VolEllipsObject : TweepuntObject
     {
-
         public override void maak(Graphics gr)
         {
             gr.FillEllipse(Kwast, RechthoekO());
@@ -114,10 +113,12 @@ namespace SchetsEditor
         {
             Rectangle r = RechthoekO();
             double d;
+            double x = p.X - (r.Width / 2) - Plek.X;
+            double y = p.Y - (r.Height / 2) - Plek.Y;
             if (base.Isgeklikt(p))
             {
-                d = ((p.X) * (p.X)) / (((r.Width + 2) / 2) * ((r.Width + 2) / 2))
-                    + ((p.Y) * (p.Y)) / (((r.Height + 2) / 2) * ((r.Height + 2) / 2));
+                d = Math.Pow(x, 2) / (Math.Pow((r.Width + 4) / 2, 2))
+                    + Math.Pow(y, 2) / (Math.Pow((r.Height + 4) / 2, 2));
                 if (d <= 1)
                     return true;
             }
@@ -136,10 +137,12 @@ namespace SchetsEditor
         {
             Rectangle r = RechthoekO();
             double d;
+            double x = p.X - (r.Width / 2) - Plek.X;
+            double y = p.Y - (r.Height / 2) - Plek.Y;
             if (base.Isgeklikt(p))
             {
-                d = ((p.X) * (p.X)) / (((r.Width - 2) / 2) * ((r.Width - 2) / 2))
-                    + ((p.Y) * (p.Y)) / (((r.Height - 2) / 2) * ((r.Height - 2) / 2));
+                d = Math.Pow(x, 2) / (Math.Pow((r.Width - 4) / 2, 2))
+                    + Math.Pow(y, 2) / (Math.Pow((r.Height - 4) / 2, 2));
                 if (d <= 1)
                     return false;
                 return true;
