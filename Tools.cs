@@ -41,19 +41,21 @@ namespace SchetsEditor
         {
             if (c >= 32)
             {
+                Point eind = new Point(0, 0);
                 s.soort = i;
                 s.letter = c;
                 s.start = startpunt;
-                s.maak();
                 Graphics gr = s.MaakBitmapGraphics();
                 Font font = new Font("Tahoma", 40);
                 string tekst = c.ToString();
                 SizeF sz = 
                 gr.MeasureString(tekst, font, this.startpunt, StringFormat.GenericTypographic);
-                //gr.DrawString   (tekst, font, kwast, 
-                                              //this.startpunt, StringFormat.GenericTypographic);
-                // gr.DrawRectangle(Pens.Black, startpunt.X, startpunt.Y, sz.Width, sz.Height);
+                eind.X = startpunt.X + (int)sz.Width;
+                eind.Y = startpunt.Y + (int)sz.Height;
+                s.eind = eind;
+                s.maak();
                 startpunt.X += (int)sz.Width;
+
                 //s.Invalidate();
             }
         }
@@ -186,16 +188,17 @@ namespace SchetsEditor
             i = 0;
         }
     }
-    
-    public class GumTool : PenTool
+
+    public class GumTool : StartpuntTool
     {
         public override string ToString() { return "gum"; }
-
-        public override void Bezig(Graphics g, Point p1, Point p2)
-        {   g.DrawLine(MaakPen(Brushes.White, 7), p1.X, p1.Y, p2.X, p2.Y);
+        public override void MuisDrag(SchetsControl s, Point p) { }
+        public override void Letter(SchetsControl s, char c) { }
+        public override void Soort(SchetsControl s) { }
+        public override void MuisVast(SchetsControl s, Point p)
+        {
+            s.gum(p);
         }
-        //\\
-        
-        //\\
+
     }
 }

@@ -94,6 +94,19 @@ namespace SchetsEditor
                 tel -= 1;
             }
         }
+        public void gum(Point p)
+        {
+            for (int i = tel; i == 0; i-=1)
+            {
+                Object ding = lijst[tel];
+                if (ding.Isgeklikt(p))
+                {
+                    lijst.RemoveAt(i);
+                    tel -= 1;
+                }
+                
+            }
+        }
        /* public void Schoon()
         {
             Graphics gr = Graphics.FromImage(bitmap);

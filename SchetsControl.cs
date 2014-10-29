@@ -81,6 +81,11 @@ namespace SchetsEditor
             schets.Schoon();
             this.Invalidate();
         }
+        public void gum(Point p)
+        {
+            schets.gum(p);
+            Invalidate();
+        }
         public void Undo(object o, EventArgs ea)
         {
             schets.Undo();
