@@ -15,7 +15,7 @@ namespace SchetsEditor
     public abstract class StartpuntTool : ISchetsTool
     {
         protected Point startpunt;
-        protected Brush kwast;
+        protected SolidBrush kwast;
         protected int i;
 
         public virtual void MuisVast(SchetsControl s, Point p)
@@ -39,7 +39,7 @@ namespace SchetsEditor
 
         public override void Letter(SchetsControl s, char c)
         {
-            if (c >= 32)
+            if (c >= 32 && c != ' ')
             {
                 Point eind = new Point(0, 0);
                 s.soort = i;
@@ -73,7 +73,7 @@ namespace SchetsEditor
                                 , new Size (Math.Abs(p1.X-p2.X), Math.Abs(p1.Y-p2.Y))
                                 );
         }
-        public static Pen MaakPen(Brush b, int dikte)
+        public static Pen MaakPen(SolidBrush b, int dikte)
         {   Pen pen = new Pen(b, dikte);
             pen.StartCap = LineCap.Round;
             pen.EndCap = LineCap.Round;
@@ -81,7 +81,7 @@ namespace SchetsEditor
         }
         public override void MuisVast(SchetsControl s, Point p)
         {   base.MuisVast(s, p);
-            kwast = Brushes.Gray;
+        kwast = new SolidBrush(Color.Gray);
         }
         public override void MuisDrag(SchetsControl s, Point p)
         {   s.Refresh();

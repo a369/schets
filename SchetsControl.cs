@@ -13,7 +13,7 @@ namespace SchetsEditor
         private int i;
         private Point p1;
         private Point p2 = new Point (0,0);
-        private Brush b;
+        private SolidBrush b;
         private char c = '-';
 
         public int soort
@@ -28,7 +28,7 @@ namespace SchetsEditor
         {
             set { p2 = value; }
         }
-        public Brush kwast
+        public SolidBrush kwast
         {
             set { b = value; }
         }

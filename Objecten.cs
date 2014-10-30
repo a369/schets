@@ -8,7 +8,7 @@ namespace SchetsEditor
     {
         public Point Plek;
         public Point Eind;
-        public Brush Kwast;
+        public SolidBrush Kwast;
         public char C;
         public int Soort;
         public abstract void maak(Graphics gr);
@@ -115,8 +115,8 @@ namespace SchetsEditor
         {
             Rectangle r = RechthoekO();
             double d;
-            double x = p.X - (r.Width / 2) - Plek.X;
-            double y = p.Y - (r.Height / 2) - Plek.Y;
+            double x = p.X - (r.Width / 2) - r.X;
+            double y = p.Y - (r.Height / 2) - r.Y;
             if (base.Isgeklikt(p))
             {
                 d = Math.Pow(x, 2) / (Math.Pow((r.Width + 4) / 2, 2))
@@ -139,8 +139,8 @@ namespace SchetsEditor
         {
             Rectangle r = RechthoekO();
             double d;
-            double x = p.X - (r.Width / 2) - Plek.X;
-            double y = p.Y - (r.Height / 2) - Plek.Y;
+            double x = p.X - (r.Width / 2) - r.X;
+            double y = p.Y - (r.Height / 2) - r.Y;
             if (base.Isgeklikt(p))
             {
                 d = Math.Pow(x, 2) / (Math.Pow((r.Width - 4) / 2, 2))
