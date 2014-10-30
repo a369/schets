@@ -53,7 +53,7 @@ namespace SchetsEditor
             w.WriteLine(schetscontrol.Opslaan());
             w.Close();
         }
-        private void open(object sender, EventArgs e)
+        public void Open()
         {
             StreamReader r = new StreamReader("file.txt");
             string s = r.ReadLine();
@@ -124,7 +124,6 @@ namespace SchetsEditor
             menu.DropDownItems.Add("Sluiten", null, this.afsluiten);
             //
             menu.DropDownItems.Add("Opslaan", null, this.opslaan);
-            menu.DropDownItems.Add("Open", null, this.open);
             //
             menuStrip.Items.Add(menu);
         }
