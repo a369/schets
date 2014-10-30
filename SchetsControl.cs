@@ -86,6 +86,15 @@ namespace SchetsEditor
             schets.gum(p);
             Invalidate();
         }
+        public string Opslaan()
+        {
+            return schets.Opslaan();
+        }
+        public void Open(string s)
+        {
+            schets.Open(s);
+            this.Invalidate();
+        }
         public void Undo(object o, EventArgs ea)
         {
             schets.Undo();

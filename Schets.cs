@@ -80,7 +80,7 @@ namespace SchetsEditor
             int gr = 0;
             int bl = 0;
             string[] v = s.Split(' ');
-            for(int t = 0; t < v.Length; t++)
+            for(int t = 0; t < v.Length - 1; t++)
             {
                 if(t % 9 == 0)
                 {
