@@ -63,7 +63,7 @@ namespace SchetsEditor
        
         public Bitmap Bitmap
         {
-            get { return schets.Bitmap; }
+            get { return schets.Bitmap; } 
         }
         //
         private void veranderAfmeting(object o, EventArgs ea)
