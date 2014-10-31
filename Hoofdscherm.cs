@@ -44,7 +44,8 @@ namespace SchetsEditor
         {   SchetsWin s = new SchetsWin();
             s.MdiParent = this;
             s.Show();
-            s.Open();
+            if (openb) 
+                s.Open();
             openb = false;
         }
         private void open(object sender, EventArgs e)
