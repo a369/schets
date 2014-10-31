@@ -98,6 +98,33 @@
   <ItemGroup>
     <None Include="Resources\text.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\disk.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ellips.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gum1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rect1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lijn1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Pen1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\promo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\text1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fillrect1.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

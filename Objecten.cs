@@ -49,9 +49,9 @@ namespace SchetsEditor
         {
             Rectangle r = RechthoekO();
             double d;
-            double dy =Eind.Y - Plek.Y;
-            double dx =Eind.X - Plek.X;
-            
+            double dy = Eind.Y - Plek.Y;
+            double dx = Eind.X - Plek.X;
+
 
             d = (Math.Abs(dy * p.X - dx * p.Y - Plek.X * Eind.Y + Eind.X * Plek.Y)) / (Math.Sqrt(dx * dx + dy * dy));
             if (d <= 3)
@@ -71,7 +71,7 @@ namespace SchetsEditor
         public override bool Isgeklikt(Point p)
         {
             Rectangle r = RechthoekO();
-            
+
             if (p.X >= r.X - 2 && p.X <= r.Right + 2 && p.Y >= r.Y - 2 && p.Y <= r.Bottom + 2)
                 return true;
             else return false;
@@ -154,7 +154,6 @@ namespace SchetsEditor
     }
     class LijnObject : TweepuntObject
     {
-
         public override void maak(Graphics gr)
         {
             gr.DrawLine(MaakPen(), Plek, Eind);
@@ -169,9 +168,6 @@ namespace SchetsEditor
                 }
             }
             return false;
-
-
         }
-
     }
 }

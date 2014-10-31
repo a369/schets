@@ -8,16 +8,10 @@ namespace SchetsEditor
     class Schets
     {
         private Bitmap bitmap;
-        //
+        public bool opgeslagen = true;
         int tel = -1;
         public List<Object> lijst = new List<Object>();
-        /*Object[] ding = {
-                            new LijnObject(),
-                            new VolRechthoekObject(),
-                            new RechthoekObject(),
-                            new VolEllipsObject(),
-                            new EllipsObject()
-                        };*/
+
         private Object ding(int i)
         {
             if (i == 0) return new LijnObject();
@@ -39,6 +33,7 @@ namespace SchetsEditor
             huidigding.C = c;
             lijst.Add(huidigding);
             tel++;
+            opgeslagen = false;
         }
         public string Opslaan()
         {
@@ -63,9 +58,9 @@ namespace SchetsEditor
 
                 s += "" + i + ' ' + p1x + ' ' + p1y + ' ' + p2x + ' ' + p2y + ' ' + ro + ' ' + gr + ' ' + bl + ' ' + c + ' ';
             }
-
-
+            opgeslagen = true;
             return s;
+
         }
 
         public void Open(string s)
@@ -133,12 +128,10 @@ namespace SchetsEditor
         {
             get { return Graphics.FromImage(bitmap); }
         }
-        //
         public Bitmap Bitmap
         {
             get { return bitmap; }
         }
-        //
         public void VeranderAfmeting(Size sz)
         {
             if (sz.Width > bitmap.Size.Width || sz.Height > bitmap.Size.Height)
@@ -155,21 +148,20 @@ namespace SchetsEditor
         public void Teken(Graphics gr)
         {
             gr.DrawImage(bitmap, 0, 0);
-            //
+
             foreach (Object ding in lijst)
             {
                 ding.maak(gr);
             }
-            //
         }
         public void Schoon()
         {
-
             while (tel > -1)
             {
                 lijst.RemoveAt(tel);
                 tel -= 1;
             }
+            opgeslagen = false;
         }
         public void Undo()
         {
@@ -178,6 +170,7 @@ namespace SchetsEditor
                 lijst.RemoveAt(tel);
                 tel -= 1;
             }
+            opgeslagen = false;
         }
         public void gum(Point p)
         {
@@ -190,14 +183,24 @@ namespace SchetsEditor
                     tel -= 1;
                     break;
                 }
+            }
+            opgeslagen = false;
+        }
+        public void Promotie(Point p)
+        {
+            for (int i = tel; i >= 0; i -= 1)
+            {
+                Object ding = lijst[i];
+                if (ding.Isgeklikt(p))
+                {
+                    lijst.Add(ding);
+                    lijst.RemoveAt(i);
+                    break;
+                }
 
             }
+            opgeslagen = false;
         }
-        /* public void Schoon()
-         {
-             Graphics gr = Graphics.FromImage(bitmap);
-             gr.FillRectangle(Brushes.White, 0, 0, bitmap.Width, bitmap.Height);
-         }*/
         public void Roteer()
         {
             foreach (Object ding in lijst)
@@ -205,7 +208,7 @@ namespace SchetsEditor
                 ding.Plek = PuntRotatie(ding.Plek);
                 ding.Eind = PuntRotatie(ding.Eind);
             }
-
+            opgeslagen = false;
         }
         public Point PuntRotatie(Point p)
         {
