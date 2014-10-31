@@ -100,6 +100,13 @@ namespace SchetsEditor
             schets.Undo();
             Invalidate();
         }
+        public void Colors(object o, EventArgs ea)
+        {
+            ColorDialog kleur = new ColorDialog();
+
+            if (kleur.ShowDialog() == DialogResult.OK)
+                penkleur = kleur.Color;
+        }
         public void Roteer(object o, EventArgs ea)
         {   schets.Roteer();
             this.veranderAfmeting(o, ea);

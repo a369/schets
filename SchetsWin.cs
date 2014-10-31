@@ -12,6 +12,7 @@ namespace SchetsEditor
 {
     public class SchetsWin : Form
     {
+        bool aan = true;
         MenuStrip menuStrip;
         SchetsControl schetscontrol;
         ISchetsTool huidigeTool;
@@ -49,16 +50,33 @@ namespace SchetsEditor
         //
         private void opslaan(object sender, EventArgs e)
         {
-            StreamWriter w = new StreamWriter("file.txt");
-            w.WriteLine(schetscontrol.Opslaan());
-            w.Close();
+            aan = false;
+            SaveFileDialog save = new SaveFileDialog();
+            save.Filter = "text files (*.txt)|*.text|All files (*.*)|*.";
+
+            if (save.ShowDialog() == DialogResult.OK)
+            {
+                string naam = save.FileName;
+                StreamWriter w = new StreamWriter(naam);
+                w.WriteLine(schetscontrol.Opslaan());
+                w.Close();
+            }
+            aan = true;
+
         }
         public void Open()
         {
-            StreamReader r = new StreamReader("file.txt");
-            string s = r.ReadLine();
-            r.Close();
-            schetscontrol.Open(s);
+            aan = false;
+            OpenFileDialog open = new OpenFileDialog();
+
+            if (open.ShowDialog() == DialogResult.OK)
+            {
+                StreamReader r = new StreamReader("file.txt");
+                string s = r.ReadLine();
+                r.Close();
+                schetscontrol.Open(s);
+            }
+            aan = true;
         }
         //
         public SchetsWin()
@@ -83,26 +101,29 @@ namespace SchetsEditor
 
             schetscontrol = new SchetsControl();
             schetscontrol.Location = new Point(64, 10);
-            schetscontrol.MouseDown += (object o, MouseEventArgs mea) =>
-                                       {
-                                           vast = true;
-                                           huidigeTool.Soort(schetscontrol);
-                                           huidigeTool.MuisVast(schetscontrol, mea.Location);
-                                       };
-            schetscontrol.MouseMove += (object o, MouseEventArgs mea) =>
-                                       {
-                                           if (vast)
-                                               huidigeTool.MuisDrag(schetscontrol, mea.Location);
-                                       };
-            schetscontrol.MouseUp += (object o, MouseEventArgs mea) =>
-                                       {
-                                           vast = false;
-                                           huidigeTool.MuisLos(schetscontrol, mea.Location);
-                                       };
-            schetscontrol.KeyPress += (object o, KeyPressEventArgs kpea) =>
-                                       {
-                                           huidigeTool.Letter(schetscontrol, kpea.KeyChar);
-                                       };
+            if (aan)
+            {
+                schetscontrol.MouseDown += (object o, MouseEventArgs mea) =>
+                                           {
+                                               vast = true;
+                                               huidigeTool.Soort(schetscontrol);
+                                               huidigeTool.MuisVast(schetscontrol, mea.Location);
+                                           };
+                schetscontrol.MouseMove += (object o, MouseEventArgs mea) =>
+                                           {
+                                               if (vast)
+                                                   huidigeTool.MuisDrag(schetscontrol, mea.Location);
+                                           };
+                schetscontrol.MouseUp += (object o, MouseEventArgs mea) =>
+                                           {
+                                               vast = false;
+                                               huidigeTool.MuisLos(schetscontrol, mea.Location);
+                                           };
+                schetscontrol.KeyPress += (object o, KeyPressEventArgs kpea) =>
+                                           {
+                                               huidigeTool.Letter(schetscontrol, kpea.KeyChar);
+                                           };
+            }
             this.Controls.Add(schetscontrol);
 
             menuStrip = new MenuStrip();
@@ -213,6 +234,12 @@ namespace SchetsEditor
             b.Text = "Undo";
             b.Location = new Point(400, 0);
             b.Click += schetscontrol.Undo;
+            paneel.Controls.Add(b);
+
+            b = new Button();
+            b.Text = "kleur";
+            b.Location = new Point(480, 0);
+            b.Click += schetscontrol.Colors;
             paneel.Controls.Add(b);
         }
     }
