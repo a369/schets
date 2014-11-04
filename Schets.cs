@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 
 
 namespace SchetsEditor
@@ -8,6 +9,7 @@ namespace SchetsEditor
     class Schets
     {
         private Bitmap bitmap;
+        private Bitmap export;
         public bool opgeslagen = true;
         int tel = -1;
         public List<Object> lijst = new List<Object>();
@@ -126,7 +128,7 @@ namespace SchetsEditor
         }
         public Graphics BitmapGraphics
         {
-            get { return Graphics.FromImage(bitmap); }
+            get { return Graphics.FromImage(export); }
         }
         public Bitmap Bitmap
         {
@@ -144,6 +146,18 @@ namespace SchetsEditor
                 gr.DrawImage(bitmap, 0, 0);
                 bitmap = nieuw;
             }
+        }
+        public Bitmap Exporteer()
+        {
+
+
+            return export;
+        }
+        public Graphics MaakBitmapGraphics()
+        {
+            Graphics g = BitmapGraphics;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            return g;
         }
         public void Teken(Graphics gr)
         {

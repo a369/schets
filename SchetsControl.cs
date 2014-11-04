@@ -75,11 +75,9 @@ namespace SchetsEditor
             schets.VeranderAfmeting(this.ClientSize);
             this.Invalidate();
         }
-        public Graphics MaakBitmapGraphics()
+        public Graphics MaakBitmapGraphics
         {
-            Graphics g = schets.BitmapGraphics;
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            return g;
+            get { return schets.MaakBitmapGraphics(); }
         }
         public void Schoon(object o, EventArgs ea)
         {
@@ -100,6 +98,10 @@ namespace SchetsEditor
         public string Opslaan()
         {
             return schets.Opslaan();
+        }
+        public Bitmap Exporteer()
+        {
+            return schets.Exporteer();
         }
         public void Open(string s)
         {

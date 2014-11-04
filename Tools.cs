@@ -47,7 +47,7 @@ namespace SchetsEditor
                 s.soort = i;
                 s.letter = c;
                 s.start = startpunt;
-                Graphics gr = s.MaakBitmapGraphics();
+                Graphics gr = s.MaakBitmapGraphics;
                 Font font = new Font("Tahoma", 40);
                 string tekst = c.ToString();
                 SizeF sz =

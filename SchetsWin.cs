@@ -47,7 +47,7 @@ namespace SchetsEditor
             else
             {
                 DialogResult res = MessageBox.Show("U heeft niks opgeslagen!"
-                                           , "Error Message"
+                                           , "Error"
                                            , MessageBoxButtons.OKCancel
                                            , MessageBoxIcon.Information
                                            );
@@ -71,7 +71,7 @@ namespace SchetsEditor
         }
         private void exporteren(object sender, EventArgs ea)
         {
-
+            schetscontrol.Exporteer().Save("file.jpg", ImageFormat.Jpeg);
         }
         public void Open()
         {
@@ -139,22 +139,7 @@ namespace SchetsEditor
             this.maakAktieButtons(deKleuren);
             this.Resize += this.veranderAfmeting;
             this.veranderAfmeting(null, null);
-            //this.Close += SchetsWin_Closed; 
-        }
-
-        void SchetsWin_Closed(object sender, FormClosingEventArgs e)
-        {
-            if (!schetscontrol.opgeslagen)
-            {
-                DialogResult res = MessageBox.Show("U heeft niks opgeslagen!"
-                                           , "Error Message"
-                                           , MessageBoxButtons.OKCancel
-                                           , MessageBoxIcon.Information
-                                           );
-                if (res == DialogResult.Cancel)
-                    e.Cancel = true;
-
-            }
+           
         }
 
         private void maakFileMenu()

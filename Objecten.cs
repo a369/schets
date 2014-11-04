@@ -13,6 +13,7 @@ namespace SchetsEditor
         public int Soort;
         public abstract void maak(Graphics gr);
         public abstract bool Isgeklikt(Point p);
+        public abstract void Save(Schets s);
 
     }
     class LetterObject : Object
@@ -23,6 +24,10 @@ namespace SchetsEditor
             string tekst = C.ToString();
             gr.DrawString(tekst, font, Kwast,
                                           this.Plek, StringFormat.GenericTypographic);
+        }
+        public override void Save(Schets s)
+        {
+            this.maak(s.MaakBitmapGraphics());
         }
         public override bool Isgeklikt(Point p)
         {
@@ -59,6 +64,7 @@ namespace SchetsEditor
             return false;
 
         }
+        public override void Save(Schets s) { }
         public Pen MaakPen()
         {
             Pen pen = new Pen(Kwast, 3);
@@ -84,6 +90,10 @@ namespace SchetsEditor
         {
             gr.FillRectangle(Kwast, RechthoekO());
         }
+        public override void Save(Schets s)
+        {
+            this.maak(s.MaakBitmapGraphics());
+        }
     }
     class RechthoekObject : VolRechthoekObject
     {
@@ -103,6 +113,10 @@ namespace SchetsEditor
                 return true;
             }
             else return false;
+        }
+        public override void Save(Schets s)
+        {
+            this.maak(s.MaakBitmapGraphics());
         }
     }
     class VolEllipsObject : TweepuntObject
@@ -125,6 +139,10 @@ namespace SchetsEditor
                     return true;
             }
             return false;
+        }
+        public override void Save(Schets s)
+        {
+            this.maak(s.MaakBitmapGraphics());
         }
 
     }
@@ -151,6 +169,10 @@ namespace SchetsEditor
             }
             return false;
         }
+        public override void Save(Schets s)
+        {
+            this.maak(s.MaakBitmapGraphics());
+        }
     }
     class LijnObject : TweepuntObject
     {
@@ -168,6 +190,10 @@ namespace SchetsEditor
                 }
             }
             return false;
+        }
+        public override void Save(Schets s)
+        {
+            this.maak(s.MaakBitmapGraphics());
         }
     }
 }
