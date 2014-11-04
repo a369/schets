@@ -9,7 +9,6 @@ namespace SchetsEditor
     class Schets
     {
         private Bitmap bitmap;
-        private Bitmap export;
         public bool opgeslagen = true;
         int tel = -1;
         public List<Object> lijst = new List<Object>();
@@ -22,8 +21,8 @@ namespace SchetsEditor
             if (i == 3) return new VolEllipsObject();
             if (i == 4) return new EllipsObject();
             else return new LetterObject();
-
         }
+
         public void Voegtoe(int i, Point p1, Point p2, SolidBrush b, char c)
         {
             Object huidigding;
@@ -37,6 +36,7 @@ namespace SchetsEditor
             tel++;
             opgeslagen = false;
         }
+
         public string Opslaan()
         {
             string s = "";
@@ -57,12 +57,10 @@ namespace SchetsEditor
                 int gr = kl.G;
                 int bl = kl.B;
 
-
                 s += "" + i + ' ' + p1x + ' ' + p1y + ' ' + p2x + ' ' + p2y + ' ' + ro + ' ' + gr + ' ' + bl + ' ' + c + ' ';
             }
             opgeslagen = true;
             return s;
-
         }
 
         public void Open(string s)
@@ -76,6 +74,7 @@ namespace SchetsEditor
             int ro = 0;
             int gr = 0;
             int bl = 0;
+
             string[] v = s.Split(' ');
             for (int t = 0; t < v.Length - 1; t++)
             {
@@ -119,21 +118,23 @@ namespace SchetsEditor
                     Voegtoe(i, p1, p2, b, c);
                 }
             }
-
         }
-        //
+
         public Schets()
         {
             bitmap = new Bitmap(1, 1);
         }
+
         public Graphics BitmapGraphics
         {
-            get { return Graphics.FromImage(export); }
+            get { return Graphics.FromImage(bitmap); }
         }
+
         public Bitmap Bitmap
         {
             get { return bitmap; }
         }
+
         public void VeranderAfmeting(Size sz)
         {
             if (sz.Width > bitmap.Size.Width || sz.Height > bitmap.Size.Height)
@@ -147,27 +148,23 @@ namespace SchetsEditor
                 bitmap = nieuw;
             }
         }
-        public Bitmap Exporteer()
-        {
 
-
-            return export;
-        }
         public Graphics MaakBitmapGraphics()
         {
             Graphics g = BitmapGraphics;
             g.SmoothingMode = SmoothingMode.AntiAlias;
             return g;
         }
+
         public void Teken(Graphics gr)
         {
             gr.DrawImage(bitmap, 0, 0);
-
             foreach (Object ding in lijst)
             {
                 ding.maak(gr);
             }
         }
+
         public void Schoon()
         {
             while (tel > -1)
@@ -177,6 +174,7 @@ namespace SchetsEditor
             }
             opgeslagen = false;
         }
+
         public void Undo()
         {
             if (tel > -1)
@@ -186,6 +184,7 @@ namespace SchetsEditor
             }
             opgeslagen = false;
         }
+
         public void gum(Point p)
         {
             for (int i = tel; i >= 0; i -= 1)
@@ -200,6 +199,7 @@ namespace SchetsEditor
             }
             opgeslagen = false;
         }
+
         public void Promotie(Point p)
         {
             for (int i = tel; i >= 0; i -= 1)
@@ -211,10 +211,10 @@ namespace SchetsEditor
                     lijst.RemoveAt(i);
                     break;
                 }
-
             }
             opgeslagen = false;
         }
+
         public void Roteer()
         {
             foreach (Object ding in lijst)
@@ -224,6 +224,7 @@ namespace SchetsEditor
             }
             opgeslagen = false;
         }
+
         public Point PuntRotatie(Point p)
         {
             Point m = Midden(p);
@@ -232,25 +233,24 @@ namespace SchetsEditor
             y = m.X;
             m.X = -m.Y;
             m.Y = y;
-
             return Origineel(m);
         }
+
         public Point Midden(Point p)
         {
             Point m = new Point(0, 0);
 
             m.X = p.X - (bitmap.Width / 2);
             m.Y = p.Y - (bitmap.Height / 2);
-
             return m;
         }
+
         public Point Origineel(Point p)
         {
             Point m = new Point(0, 0);
 
             m.X = p.X + (bitmap.Width / 2);
             m.Y = p.Y + (bitmap.Height / 2);
-
             return m;
         }
     }

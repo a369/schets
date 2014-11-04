@@ -12,6 +12,7 @@ namespace SchetsEditor
         void Letter(SchetsControl s, char c);
         void Soort(SchetsControl s);
     }
+
     public abstract class StartpuntTool : ISchetsTool
     {
         protected Point startpunt;
@@ -23,13 +24,17 @@ namespace SchetsEditor
             startpunt = p;
             s.start = p;
         }
+
         public virtual void MuisLos(SchetsControl s, Point p)
         {
             kwast = new SolidBrush(s.PenKleur);
             s.kwast = kwast;
         }
+
         public abstract void MuisDrag(SchetsControl s, Point p);
+
         public abstract void Letter(SchetsControl s, char c);
+
         public abstract void Soort(SchetsControl s);
     }
 
@@ -48,7 +53,7 @@ namespace SchetsEditor
                 s.letter = c;
                 s.start = startpunt;
                 Graphics gr = s.MaakBitmapGraphics;
-                Font font = new Font("Tahoma", 40);
+                Font font = new Font("Helvetica", 40);
                 string tekst = c.ToString();
                 SizeF sz =
                 gr.MeasureString(tekst, font, this.startpunt, StringFormat.GenericTypographic);
@@ -57,10 +62,9 @@ namespace SchetsEditor
                 s.eind = eind;
                 s.maak();
                 startpunt.X += (int)sz.Width;
-
-                //s.Invalidate();
             }
         }
+
         public override void Soort(SchetsControl s)
         {
             i = 5;
@@ -70,30 +74,34 @@ namespace SchetsEditor
     public abstract class TweepuntTool : StartpuntTool
     {
         protected Point eindpunt;
+
         public static Rectangle Punten2Rechthoek(Point p1, Point p2)
         {
             return new Rectangle(new Point(Math.Min(p1.X, p2.X), Math.Min(p1.Y, p2.Y))
                                 , new Size(Math.Abs(p1.X - p2.X), Math.Abs(p1.Y - p2.Y))
                                 );
         }
-        public static Pen MaakPen(SolidBrush b, int dikte)
+
+        public static Pen Pen()
         {
-            Pen pen = new Pen(b, dikte);
+            Pen pen = new Pen(Color.Gray, 3);
             pen.StartCap = LineCap.Round;
             pen.EndCap = LineCap.Round;
             return pen;
         }
+
         public override void MuisVast(SchetsControl s, Point p)
         {
             base.MuisVast(s, p);
             kwast = new SolidBrush(Color.Gray);
         }
+
         public override void MuisDrag(SchetsControl s, Point p)
         {
             s.Refresh();
             this.Bezig(s.CreateGraphics(), this.startpunt, p);
         }
-        //belangrijk
+
         public override void MuisLos(SchetsControl s, Point p)
         {
             base.MuisLos(s, p);
@@ -101,12 +109,13 @@ namespace SchetsEditor
             s.soort = i;
             s.maak();
         }
+
         public override void Letter(SchetsControl s, char c) { }
+
         public abstract void Bezig(Graphics g, Point p1, Point p2);
+
         public abstract override void Soort(SchetsControl s);
     }
-
-
 
     public class RechthoekTool : TweepuntTool
     {
@@ -114,39 +123,44 @@ namespace SchetsEditor
 
         public override void Bezig(Graphics g, Point p1, Point p2)
         {
-            g.DrawRectangle(MaakPen(kwast, 3), TweepuntTool.Punten2Rechthoek(p1, p2));
+            g.DrawRectangle(Pen(), TweepuntTool.Punten2Rechthoek(p1, p2));
         }
+
         public override void Soort(SchetsControl s)
         {
             i = 2;
         }
     }
-    //
+
     public class EllipsTool : TweepuntTool
     {
         public override string ToString() { return "ellips"; }
 
         public override void Bezig(Graphics g, Point p1, Point p2)
         {
-            g.DrawEllipse(MaakPen(kwast, 3), TweepuntTool.Punten2Rechthoek(p1, p2));
+            g.DrawEllipse(Pen(), TweepuntTool.Punten2Rechthoek(p1, p2));
         }
+
         public override void Soort(SchetsControl s)
         {
             i = 4;
         }
     }
+
     public class VolEllipsTool : EllipsTool
     {
         public override string ToString() { return "disk"; }
+
         public override void Soort(SchetsControl s)
         {
             i = 3;
         }
     }
-    //
+
     public class VolRechthoekTool : RechthoekTool
     {
         public override string ToString() { return "vlak"; }
+
         public override void Soort(SchetsControl s)
         {
             i = 1;
@@ -159,8 +173,9 @@ namespace SchetsEditor
 
         public override void Bezig(Graphics g, Point p1, Point p2)
         {
-            g.DrawLine(MaakPen(this.kwast, 3), p1.X, p1.Y, p2.X, p2.Y);
+            g.DrawLine(Pen(), p1.X, p1.Y, p2.X, p2.Y);
         }
+
         public override void Soort(SchetsControl s)
         {
             i = 0;
@@ -176,6 +191,7 @@ namespace SchetsEditor
             this.MuisLos(s, p);
             this.MuisVast(s, p);
         }
+
         public override void Soort(SchetsControl s)
         {
             i = 0;
@@ -185,9 +201,13 @@ namespace SchetsEditor
     public class GumTool : StartpuntTool
     {
         public override string ToString() { return "gum"; }
+
         public override void MuisDrag(SchetsControl s, Point p) { this.MuisVast(s, p); }
+
         public override void Letter(SchetsControl s, char c) { }
+
         public override void Soort(SchetsControl s) { }
+
         public override void MuisVast(SchetsControl s, Point p)
         {
             s.gum(p);
@@ -196,9 +216,9 @@ namespace SchetsEditor
     public class PromotieTool : GumTool
     {
         public override string ToString() { return "promo"; }
+
         public override void MuisDrag(SchetsControl s, Point p) { }
-        public override void Letter(SchetsControl s, char c) { }
-        public override void Soort(SchetsControl s) { }
+
         public override void MuisVast(SchetsControl s, Point p)
         {
             s.Promotie(p);

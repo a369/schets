@@ -8,6 +8,7 @@ namespace SchetsEditor
     {
         bool openb = false;
         MenuStrip menuStrip;
+
         public Hoofdscherm()
         {
             this.ClientSize = new Size(800, 650);
@@ -19,6 +20,7 @@ namespace SchetsEditor
             this.IsMdiContainer = true;
             this.MainMenuStrip = menuStrip;
         }
+
         private void maakFileMenu()
         {
             ToolStripDropDownItem menu;
@@ -28,6 +30,7 @@ namespace SchetsEditor
             menu.DropDownItems.Add("Open", null, this.open);
             menuStrip.Items.Add(menu);
         }
+
         private void maakHelpMenu()
         {
             ToolStripDropDownItem menu;
@@ -35,6 +38,7 @@ namespace SchetsEditor
             menu.DropDownItems.Add("Over \"Schets\"", null, this.about);
             menuStrip.Items.Add(menu);
         }
+
         private void about(object o, EventArgs ea)
         {
             MessageBox.Show("Schets versie 2.0\n(c) UU Informatica 2010 \nTomas & Adriaan"
@@ -53,12 +57,14 @@ namespace SchetsEditor
                 s.Open();
             openb = false;
         }
+
         private void open(object sender, EventArgs e)
         {
             openb = true;
             nieuw(sender, e);
 
         }
+
         private void afsluiten(object sender, EventArgs e)
         {
             this.Close();

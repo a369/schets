@@ -53,9 +53,9 @@ namespace SchetsEditor
                                            );
                 if (res == DialogResult.OK)
                     this.Close();
-
             }
         }
+
         private void opslaan(object sender, EventArgs e)
         {
             SaveFileDialog save = new SaveFileDialog();
@@ -69,10 +69,7 @@ namespace SchetsEditor
                 w.Close();
             }
         }
-        private void exporteren(object sender, EventArgs ea)
-        {
-            schetscontrol.Exporteer().Save("file.jpg", ImageFormat.Jpeg);
-        }
+
         public void Open()
         {
             OpenFileDialog open = new OpenFileDialog();
@@ -85,23 +82,19 @@ namespace SchetsEditor
                 schetscontrol.Open(s);
             }
         }
+
         public SchetsWin()
         {
             ISchetsTool[] deTools = { new PenTool()         
                                     , new LijnTool()
                                     , new RechthoekTool()
                                     , new VolRechthoekTool()
-                                    //
                                     , new EllipsTool()
                                     , new VolEllipsTool()
-                                    //
                                     , new TekstTool()
                                     , new GumTool()
                                     , new PromotieTool()
                                     };
-            String[] deKleuren = { "Black", "White", "Red", "Green", "Blue"
-                                 , "Yellow", "Magenta", "Cyan", "Gray"
-                                 };
 
             this.ClientSize = new Size(700, 570);
             huidigeTool = deTools[0];
@@ -136,10 +129,9 @@ namespace SchetsEditor
             this.maakFileMenu();
             this.maakToolMenu(deTools);
             this.maakToolButtons(deTools);
-            this.maakAktieButtons(deKleuren);
+            this.maakAktieButtons();
             this.Resize += this.veranderAfmeting;
             this.veranderAfmeting(null, null);
-           
         }
 
         private void maakFileMenu()
@@ -148,7 +140,6 @@ namespace SchetsEditor
             menu.MergeAction = MergeAction.MatchOnly;
             menu.DropDownItems.Add("Sluiten", null, this.afsluiten);
             menu.DropDownItems.Add("Opslaan", null, this.opslaan);
-            menu.DropDownItems.Add("Exporteren", null, this.exporteren);
             menuStrip.Items.Add(menu);
         }
 
@@ -166,7 +157,6 @@ namespace SchetsEditor
             }
             menuStrip.Items.Add(menu);
         }
-
 
         private void maakToolButtons(ICollection<ISchetsTool> tools)
         {
@@ -189,10 +179,10 @@ namespace SchetsEditor
             }
         }
 
-        private void maakAktieButtons(String[] kleuren)
+        private void maakAktieButtons()
         {
             paneel = new Panel();
-            paneel.Size = new Size(600, 24);
+            paneel.Size = new Size(320, 24);
             this.Controls.Add(paneel);
 
             Button b;

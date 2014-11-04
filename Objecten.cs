@@ -14,21 +14,23 @@ namespace SchetsEditor
         public abstract void maak(Graphics gr);
         public abstract bool Isgeklikt(Point p);
         public abstract void Save(Schets s);
-
     }
+
     class LetterObject : Object
     {
         public override void maak(Graphics gr)
         {
-            Font font = new Font("Tahoma", 40);
+            Font font = new Font("Helvetica", 40);
             string tekst = C.ToString();
             gr.DrawString(tekst, font, Kwast,
                                           this.Plek, StringFormat.GenericTypographic);
         }
+
         public override void Save(Schets s)
         {
             this.maak(s.MaakBitmapGraphics());
         }
+
         public override bool Isgeklikt(Point p)
         {
             int x1 = Math.Min(Eind.X, Plek.X);
@@ -40,8 +42,8 @@ namespace SchetsEditor
                 return true;
             else return false;
         }
-
     }
+
     class TweepuntObject : Object
     {
         public Rectangle RechthoekO()
@@ -57,14 +59,15 @@ namespace SchetsEditor
             double dy = Eind.Y - Plek.Y;
             double dx = Eind.X - Plek.X;
 
-
             d = (Math.Abs(dy * p.X - dx * p.Y - Plek.X * Eind.Y + Eind.X * Plek.Y)) / (Math.Sqrt(dx * dx + dy * dy));
             if (d <= 3)
                 return true;
             return false;
 
         }
+
         public override void Save(Schets s) { }
+
         public Pen MaakPen()
         {
             Pen pen = new Pen(Kwast, 3);
@@ -74,6 +77,7 @@ namespace SchetsEditor
         }
 
         public override void maak(Graphics gr) { }
+
         public override bool Isgeklikt(Point p)
         {
             Rectangle r = RechthoekO();
@@ -83,18 +87,20 @@ namespace SchetsEditor
             else return false;
         }
     }
+
     class VolRechthoekObject : TweepuntObject
     {
-
         public override void maak(Graphics gr)
         {
             gr.FillRectangle(Kwast, RechthoekO());
         }
+
         public override void Save(Schets s)
         {
             this.maak(s.MaakBitmapGraphics());
         }
     }
+
     class RechthoekObject : VolRechthoekObject
     {
 
@@ -114,17 +120,20 @@ namespace SchetsEditor
             }
             else return false;
         }
+
         public override void Save(Schets s)
         {
             this.maak(s.MaakBitmapGraphics());
         }
     }
+
     class VolEllipsObject : TweepuntObject
     {
         public override void maak(Graphics gr)
         {
             gr.FillEllipse(Kwast, RechthoekO());
         }
+
         public override bool Isgeklikt(Point p)
         {
             Rectangle r = RechthoekO();
@@ -140,19 +149,20 @@ namespace SchetsEditor
             }
             return false;
         }
+
         public override void Save(Schets s)
         {
             this.maak(s.MaakBitmapGraphics());
         }
-
     }
+
     class EllipsObject : VolEllipsObject
     {
-
         public override void maak(Graphics gr)
         {
             gr.DrawEllipse(MaakPen(), RechthoekO());
         }
+
         public override bool Isgeklikt(Point p)
         {
             Rectangle r = RechthoekO();
@@ -169,17 +179,20 @@ namespace SchetsEditor
             }
             return false;
         }
+
         public override void Save(Schets s)
         {
             this.maak(s.MaakBitmapGraphics());
         }
     }
+
     class LijnObject : TweepuntObject
     {
         public override void maak(Graphics gr)
         {
             gr.DrawLine(MaakPen(), Plek, Eind);
         }
+
         public override bool Isgeklikt(Point p)
         {
             if (base.Isgeklikt(p))
@@ -191,6 +204,7 @@ namespace SchetsEditor
             }
             return false;
         }
+
         public override void Save(Schets s)
         {
             this.maak(s.MaakBitmapGraphics());
