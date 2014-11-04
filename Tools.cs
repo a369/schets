@@ -74,6 +74,7 @@ namespace SchetsEditor
     public abstract class TweepuntTool : StartpuntTool
     {
         protected Point eindpunt;
+        bool b = false;
 
         public static Rectangle Punten2Rechthoek(Point p1, Point p2)
         {
@@ -93,6 +94,7 @@ namespace SchetsEditor
         public override void MuisVast(SchetsControl s, Point p)
         {
             base.MuisVast(s, p);
+            b = true;
             kwast = new SolidBrush(Color.Gray);
         }
 
@@ -107,6 +109,7 @@ namespace SchetsEditor
             base.MuisLos(s, p);
             s.eind = p;
             s.soort = i;
+            if(b)
             s.maak();
         }
 

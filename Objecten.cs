@@ -64,7 +64,6 @@ namespace SchetsEditor
             if (d <= 3)
                 return true;
             return false;
-
         }
 
         public override void Save(Schets s) { }
