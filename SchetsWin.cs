@@ -76,7 +76,8 @@ namespace SchetsEditor
 
             if (open.ShowDialog() == DialogResult.OK)
             {
-                StreamReader r = new StreamReader("file.txt");
+                string naam = open.FileName;
+                StreamReader r = new StreamReader(naam);
                 string s = r.ReadLine();
                 r.Close();
                 schetscontrol.Open(s);

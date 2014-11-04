@@ -11,7 +11,7 @@ namespace SchetsEditor
         private Color penkleur = Color.Black;
         private int i;
         private Point p1;
-        private Point p2 = new Point(0, 0);
+        private Point p2 = new Point(-1, 0);
         private SolidBrush b;
         private char c = '-';
 
@@ -42,6 +42,7 @@ namespace SchetsEditor
 
         public void maak()
         {
+            if(p2.X == -1)
             schets.Voegtoe(i, p1, p2, b, c);
             Invalidate();
         }

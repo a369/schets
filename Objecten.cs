@@ -20,10 +20,11 @@ namespace SchetsEditor
     {
         public override void maak(Graphics gr)
         {
+            Point start = new Point(Math.Min(Plek.X, Eind.X), Math.Min(Plek.Y, Eind.Y));
             Font font = new Font("Helvetica", 40);
             string tekst = C.ToString();
             gr.DrawString(tekst, font, Kwast,
-                                          this.Plek, StringFormat.GenericTypographic);
+                                          start, StringFormat.GenericTypographic);
         }
 
         public override void Save(Schets s)
